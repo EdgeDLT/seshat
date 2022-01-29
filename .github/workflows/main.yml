@@ -1,0 +1,24 @@
+name: Fetch Contracts
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+    - cron: '0 6 * * *'
+    - cron: '0 12 * * *'
+    - cron: '0 18 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - run: npm install
+    - run: npm run start
+    - run: |
+        git config --global user.name "edgedlt"
+        git config --global user.email "edgedlt@protonmail.com"
+        git add -A
+        git commit -m "update contracts.json"
+        git push
