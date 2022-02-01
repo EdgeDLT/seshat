@@ -21,7 +21,10 @@ fs.writeFileSync("./data/contracts.json", JSON.stringify(contracts))
 async function fetchContracts(network) {
     let i
     let contracts = []
-    contracts.push(nativeContracts)
+
+    nativeContracts.forEach(el => {
+        contracts.push(el)
+    })
 
     const res = await fetch(
         `https://dora.coz.io/api/v1/neo3/${network}/contracts/1`
