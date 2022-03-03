@@ -1,11 +1,11 @@
 name: Fetch Contracts
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
-    - cron: '0 6 * * *'
-    - cron: '0 12 * * *'
-    - cron: '0 18 * * *'
+  #schedule:
+    #- cron: '0 0 * * *'
+    #- cron: '0 6 * * *'
+    #- cron: '0 12 * * *'
+    #- cron: '0 18 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
