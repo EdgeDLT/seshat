@@ -1,6 +1,8 @@
 import fs from "fs"
 import fetch from "node-fetch"
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
 let contracts = {
     mainnet: [],
     testnet: []
@@ -35,6 +37,7 @@ async function fetchContracts(network) {
     data.items.forEach((el) => contracts.push(el))
 
     for (i = 2; i < pages; i++) {
+        await sleep(2000)
         const r = await fetch(
             `https://dora.coz.io/api/v1/neo3/${network}/contracts/${i}`
         )
