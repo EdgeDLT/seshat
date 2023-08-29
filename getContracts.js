@@ -10,7 +10,7 @@ let nativeContracts = [{"hash":"0xfe924b7cfe89ddd271abaf7210a80a7e11178758","man
 
 console.log("Fetching contracts..")
 const mainnetContracts = await fetchContracts("mainnet")
-const testnetContracts = await fetchContracts("testnet_rc4")
+const testnetContracts = await fetchContracts("testnet")
 
 contracts.mainnet = [...new Set(mainnetContracts)] // Prevent duplicate entries
 contracts.testnet = [...new Set(testnetContracts)]
