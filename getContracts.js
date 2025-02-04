@@ -21,7 +21,6 @@ console.log("Writing to file..")
 fs.writeFileSync("./data/contracts.json", JSON.stringify(contracts))
 
 async function fetchContracts(network) {
-    let i
     let contracts = []
 
     nativeContracts.forEach(el => {
@@ -29,21 +28,8 @@ async function fetchContracts(network) {
     })
 
     const res = await fetch(
-        `https://dora.coz.io/api/v1/neo3/${network}/contracts/1`
+        `https://dora.coz.io/api/v2/neo3/${network}/contracts/*`
     )
     const data = await res.json()
-    const pages = Math.round(data.totalCount / 15) // 15 entries per page
-
-    data.items.forEach((el) => contracts.push(el))
-
-    for (i = 2; i < pages; i++) {
-        await sleep(2000)
-        const r = await fetch(
-            `https://dora.coz.io/api/v1/neo3/${network}/contracts/${i}`
-        )
-        const d = await r.json()
-
-        d.items.forEach((el) => contracts.push(el))
-    }
-    return contracts
+    return contracts.concat(data.items)
 }
